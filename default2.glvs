@@ -1,0 +1,22 @@
+
+//Transformation Matrices
+uniform mat4 LProjectionMatrix;
+uniform mat4 LModelViewMatrix;
+uniform vec2 Pos;
+
+//Vertex position attribute
+attribute vec2 VertOffset;
+
+//Texture coordinate attribute
+attribute vec2 TexCoord;
+varying vec2 texCoord;
+
+void main()
+{
+	//Process texCoord
+	texCoord = TexCoord;
+	
+	//Process vertex
+	gl_Position = LProjectionMatrix * LModelViewMatrix
+	 * vec4( Pos.x+VertOffset.x, Pos.y+VertOffset.y , 0.0, 1.0 );
+}
