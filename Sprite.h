@@ -35,7 +35,6 @@ class Sprite
 		 std::string VertexPath, std::string FragmentPath);
 		~Sprite();
 		
-		
 		point pos;
 		point vel;
 		point accel;

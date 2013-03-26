@@ -13,6 +13,8 @@
 #include "Input.h"
 #include "Sprite.h"
 #include "String.h"
+#include "Player.h"
+#include "Texture.h"
 
 class Game
 {

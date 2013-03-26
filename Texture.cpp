@@ -2,6 +2,18 @@
 
 std::map<std::string, Texture*> Texture::_textures;
 
+void Texture::init()
+{
+	ilInit();
+	ilClearColour(255, 255, 255, 000);
+	
+	ILenum ilError = ilGetError();
+	if(ilError != IL_NO_ERROR)
+	{
+		printf("error loading DevIL: %s\n", iluErrorString(ilError));
+	}
+}
+
 Texture::Texture(std::string path)
 {
 	_id = 0;

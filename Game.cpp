@@ -7,6 +7,7 @@ String* string;
 int loop = 0;
 Uint8 *keystates;
 std::vector<bool> butstates;
+Player player[4];
 
 
 SDL_Joystick *joystick;
@@ -21,6 +22,7 @@ Game::Game()
 	
 	window = new Window();
 	
+	Texture::init();
 	Input::init();
 	
 	for(int i=0; i<SDL_NumJoysticks(); i++)
@@ -121,9 +123,14 @@ int main()
 {
 	Game* game = new Game();
 	
-	sprite2 = new Sprite(-200, 0, 100, 100, "imgs/bigface.png", "default.glvs", "default.glfs");
-	sprite = new Sprite(0, 0, 10, 10, "imgs/char.png", "default2.glvs", "default2.glfs");
+	sprite2 = new Sprite(-200, 0, 100, 100, "data/imgs/bigface.png", "data/default2.glvs", "data/default2.glfs");
+	sprite = new Sprite(0, 0, 10, 10, "data/imgs/char.png", "data/default.glvs", "data/default.glfs");
 	string = new String("Hello World", 0, 0);
+	
+	player[0].input = Input::ctrls[0];
+	player[0].sprites.push_back(sprite);
+	player[0].sprites.push_back(sprite2);
+	
 	
 	int t = 0;
 	const int dt = 16;

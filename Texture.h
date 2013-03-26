@@ -20,6 +20,7 @@ class Texture
 		GLuint _height;
 		
 	public:
+		static void init();
 		Texture(std::string path);
 		~Texture();
 		

@@ -1,4 +1,3 @@
-
 //Texture Color
 uniform vec4 LTextureColor;
 
@@ -17,13 +16,11 @@ out vec4 gl_FragColor;
 
 //Texture coordinate
 varying vec2 texCoord;
-
 #endif
 
 void main()
 {
 	//Set fragment
 	gl_FragColor = texture( LTextureUnit, texCoord ) * LTextureColor;
-	//gl_FragColor = LTextureColor;
 }
 

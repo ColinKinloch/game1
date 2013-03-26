@@ -12,10 +12,19 @@ GLuint Window::shadProg;
 glm::mat4 Window::_projMat;
 glm::mat4 Window::_modViewMat;
 
+GLuint fbTex;
+GLuint fbObj;
+
 Window::Window()
 {
 	window = SDL_CreateWindow("game1 test", SDL_WINDOWPOS_UNDEFINED, SDL_WINDOWPOS_UNDEFINED,
 	 800, 600, SDL_WINDOW_OPENGL | SDL_WINDOW_RESIZABLE);
+	
+	SDL_Surface *icon = SDL_LoadBMP("data/imgs/icon.bmp");
+	icon->format->Amask = 0xFF000000; 
+	SDL_SetWindowIcon(window, icon);
+	
+	SDL_GetWindowSize(window, &_width, &_height);
 	
 	zoom = 3;
 	
@@ -27,12 +36,6 @@ Window::Window()
 	
 	if( !GLEW_VERSION_3_2 )
 		printf( "OpenGL 3.2 not supported!\n" );
-	
-	SDL_Surface *icon = SDL_LoadBMP("imgs/icon.bmp");
-	icon->format->Amask = 0xFF000000; 
-	SDL_SetWindowIcon(window, icon);
-	
-	SDL_GetWindowSize(window, &_width, &_height);
 	
 	glClearColor(0.0f, 0.0f, 0.0f, 0.0f);
 	
@@ -103,11 +106,31 @@ Window::Window()
 	_modViewPointer = glGetUniformLocation(shadProg, "LModelViewMatrix");
 	*/
 	
+	glEnable(GL_MULTISAMPLE);
+	
+	int samples = 2;
+	/*
+	glGenTextures(1, &fbTex);
+	glBindTexture(GL_TEXTURE_2D_MULTISAMPLE, fbTex);
+	glTexImage2DMultisample(GL_TEXTURE_2D_MULTISAMPLE, samples, GL_RGBA8, _width, _height, false);
+	
+	glGenFramebuffers(1, &fbObj);
+	glBindFramebuffer(GL_FRAMEBUFFER, fbObj);
+	glFramebufferTexture2D(GL_FRAMEBUFFER, GL_COLOR_ATTACHMENT0, GL_TEXTURE_2D_MULTISAMPLE, fbTex, 0);
+	
+	err = glCheckFramebufferStatus(GL_FRAMEBUFFER_EXT);
+	if(err != GL_FRAMEBUFFER_COMPLETE_EXT)
+	{
+		printf("Error: %s\n", gluErrorString(err));
+	}
+	err = glGetError();
+	if(err != GL_NO_ERROR)
+		printf("Window: FrameBuffer: %s\n", gluErrorString(err));
+	*/
 	glHint(GL_NICEST, GL_FRAGMENT_SHADER_DERIVATIVE_HINT);
 	glHint(GL_NICEST, GL_LINE_SMOOTH_HINT);
 	glHint(GL_NICEST, GL_POLYGON_SMOOTH_HINT);
 	glHint(GL_NICEST, GL_TEXTURE_COMPRESSION_HINT);
-	glEnable(GL_MULTISAMPLE);
 	
 	resize();
 	
@@ -115,14 +138,14 @@ Window::Window()
 	if(err != GL_NO_ERROR)
 		printf("Window: Shader: %s\n", gluErrorString(err));
 	
-	ilInit();
+	/*ilInit();
 	ilClearColour(255, 255, 255, 000);
 	
 	ILenum ilError = ilGetError();
 	if(ilError != IL_NO_ERROR)
 	{
 		printf("error loading DevIL: %s\n", iluErrorString(ilError));
-	}
+	}*/
 	
 }
 
