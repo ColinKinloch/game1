@@ -7,7 +7,7 @@
 #define SDL_NO_GLEXT
 #include <SDL2/SDL_opengl.h>
 #include <GL/glext.h>
-#include <GL3/gl3.h>
+#include <GL/gl.h>
 #include <GL/glu.h>
 #include "Window.h"
 #include "Input.h"
