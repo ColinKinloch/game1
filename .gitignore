@@ -21,3 +21,6 @@ main
 
 # C Libraries
 SDL
+
+# Build directory
+build

@@ -5,7 +5,7 @@ Sprite* sprite;
 Sprite* sprite2;
 String* string;
 int loop = 0;
-Uint8 *keystates;
+const Uint8 *keystates;
 std::vector<bool> butstates;
 Player player[4];
 
