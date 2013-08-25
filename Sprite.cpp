@@ -54,26 +54,17 @@ Sprite::Sprite(float X, float Y, float Width, float Height,
 	GLint texcoord = glGetAttribLocation(_s->getID(), "TexCoord");
 	GLint vertexpos = glGetAttribLocation(_s->getID(), "VertOffset");
 	
-	glEnableVertexAttribArray(texcoord);
-	glEnableVertexAttribArray(vertexpos);
-		
-		glBindBuffer( GL_ARRAY_BUFFER, _vboID );
-		
-		glBufferSubData(GL_ARRAY_BUFFER, 0, 4 * sizeof(GLtexpoint), _vData);
-		GLint berr = glGetError();
-		
-		glVertexAttribPointer(texcoord, 2, GL_FLOAT, GL_FALSE, sizeof(GLtexpoint), (GLvoid*)offsetof(GLtexpoint, texCoord));
-		glVertexAttribPointer(vertexpos, 2, GL_FLOAT, GL_FALSE, sizeof(GLtexpoint), (GLvoid*)offsetof(GLtexpoint, position));
-		
-		
-		glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, _iboID);
-		glDrawElements(GL_TRIANGLE_FAN, 4, GL_UNSIGNED_INT, NULL);
-		
-	glDisableVertexAttribArray(texcoord);
-	glDisableVertexAttribArray(vertexpos);
+	glBindBuffer( GL_ARRAY_BUFFER, _vboID );
 	
+	glBufferSubData(GL_ARRAY_BUFFER, 0, 4 * sizeof(GLtexpoint), _vData);
+	
+	glVertexAttribPointer(texcoord, 2, GL_FLOAT, GL_FALSE, sizeof(GLtexpoint), (GLvoid*)offsetof(GLtexpoint, texCoord));
+	glVertexAttribPointer(vertexpos, 2, GL_FLOAT, GL_FALSE, sizeof(GLtexpoint), (GLvoid*)offsetof(GLtexpoint, position));
+	
+	
+	GLint berr = glGetError();
 	if(berr != GL_NO_ERROR)
-		printf("Sprite: render:berr %s\n", gluErrorString(berr));
+	 printf("Sprite: render:berr %s\n", gluErrorString(berr));
 }
 
 Sprite::~Sprite()
